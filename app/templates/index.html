@@ -95,70 +95,8 @@
                 crdContent.textContent = JSON.stringify(crd, null, 2);
                 crdContainer.appendChild(crdContent);
 
-                const form = document.createElement('form');
-                form.className = 'mt-4';
-                buildForm(crd.spec, form, '');
-                crdContainer.appendChild(form);
-
-                const generateButton = document.createElement('button');
-                generateButton.textContent = 'Generate values.yaml';
-                generateButton.className = 'btn btn-success mt-4';
-                generateButton.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    generateYAML(form);
-                });
-                crdContainer.appendChild(generateButton);
-
                 display.appendChild(crdContainer);
             });
-        }
-
-        function buildForm(spec, container, path) {
-            for (const key in spec) {
-                const fieldContainer = document.createElement('div');
-                fieldContainer.className = 'form-group';
-                const label = document.createElement('label');
-                label.textContent = key;
-                fieldContainer.appendChild(label);
-
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.className = 'form-control';
-                input.name = path ? `${path}.${key}` : key;
-                fieldContainer.appendChild(input);
-
-                container.appendChild(fieldContainer);
-            }
-        }
-
-        function generateYAML(form) {
-            const formData = new FormData(form);
-            const json = {};
-            formData.forEach((value, key) => {
-                const keys = key.split('.');
-                keys.reduce((acc, k, i) => {
-                    if (i === keys.length - 1) {
-                        acc[k] = value;
-                    } else {
-                        acc[k] = acc[k] || {};
-                    }
-                    return acc[k];
-                }, json);
-            });
-
-            const yaml = jsyaml.dump(json);
-            downloadYAML(yaml);
-        }
-
-        function downloadYAML(yaml) {
-            const blob = new Blob([yaml], { type: 'application/x-yaml' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'values.yaml';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
         }
 
         // Include js-yaml library
