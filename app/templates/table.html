@@ -23,23 +23,14 @@
             <table id="data" class="table table-striped">
                 <tbody>
                     <tr>
-                        <td>{{ level.name }}</td>
+                        <td><button onclick="appendHtml('{{ level.name }}')">{{ level.name }}</button></td>
                         <td>{{ level.description }}</td>
                         <td>{{ level.types }}</td>
                         <td>{{ level.info }}</td>
                     </tr>
                 </tbody>
             </table>
-            <table id="data" class="table table-striped", style="margin-left: 40px;">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Type</th>
-                    <th>Info</th>
-                  </tr>
-                </thead>
-                
+            <table class="table table-striped", style="margin-left: 40px;" id = "{{level.name}}">
                 <tbody>
                     {% for sub in level.childs %}
                     <tr>
@@ -56,4 +47,12 @@
       {% endfor %}
     </tbody>
   </table>
+  <script>
+    function appendHtml(id){
+        var displayDiv = document.getElementById(id);
+        var displayValue = (displayDiv.style.display === "") ? "none" : "";
+        this.innerHTML = (displayValue === "block") ? "Hide The Div" : "Show The Div";
+        displayDiv.style.display = displayValue;
+    }
+  </script>
 {% endblock %}
