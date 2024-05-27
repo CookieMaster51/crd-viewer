@@ -12,12 +12,47 @@
     </thead>
     <tbody>
       {% for level in crd.childs %}
-        <tr>
-          <td>{{ level.name }}</td>
-          <td>{{ level.description }}</td>
-          <td>{{ level.type }}</td>
-          <td>{{ level.info }}</td>
-        </tr>
+        {% if level.childs == () %}
+            <tr>
+                <td>{{ level.name }}</td>
+                <td>{{ level.description }}</td>
+                <td>{{ level.types }}</td>
+                <td>{{ level.info }}</td>
+            </tr>
+        {% else %}
+            <table id="data" class="table table-striped">
+                <tbody>
+                    <tr>
+                        <td>{{ level.name }}</td>
+                        <td>{{ level.description }}</td>
+                        <td>{{ level.types }}</td>
+                        <td>{{ level.info }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="data" class="table table-striped", style="margin-left: 40px;">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Info</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                    {% for sub in level.childs %}
+                    <tr>
+                        <td>{{ level.name + "." + sub.name }}</td>
+                        <td>{{ sub.description }}</td>
+                        <td>{{ sub.types }}</td>
+                        <td>{{ sub.info }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        {% endif %}
       {% endfor %}
     </tbody>
   </table>

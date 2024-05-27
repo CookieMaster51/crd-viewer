@@ -10,7 +10,7 @@ class crd_object:
         self.types = types
     
     def __repr__(self) -> str:
-        return f"{self.name} {str(self.childs)}"
+        return f"{self.name}:({self.types}) {str(self.childs)}"
     
     def add_child(self, other):
         self.childs.append(other)

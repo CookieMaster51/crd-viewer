@@ -8,31 +8,35 @@ app = Flask(__name__)
 
 @app.route("/")
 def fetch_crd():
-    response = requests.get("https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/charts/crds/crds/crd-prometheusrules.yaml")
-#     response = """type: object
-# description: "foo bar object"
-# properties:
-#   foo:
-#     type: string
-#     pattern: "abc"
-#   bar:
-#     type: integer
-#   metadata:
-#     type: object
-#     properties:
-#       name:
-#         type: string
-#         pattern: "^a"
-# anyOf:
-# - properties:
-#     bar:
-#       minimum: 42
-#   required: ["bar"]"""
+    #response = requests.get("https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/charts/crds/crds/crd-prometheusrules.yaml")
+    response = """type: object
+description: "foo bar object"
+properties:
+  foo:
+    type: string
+    pattern: "abc"
+    description: "Does some stuff idk what"
+  bar:
+    type: integer
+  metadata:
+    type: object
+    properties:
+      name:
+        type: string
+        pattern: "^a"
+        description: "its a name goshdarnit"
+anyOf:
+- properties:
+    bar:
+      minimum: 42
+  required: ["bar"]"""
 
-    crds = list(yaml.safe_load_all(response.text))
+    crds = list(yaml.safe_load_all(response))#.text))
     crd = crds[0]
     # pprint.pp(crd)
-    return render_template("table.html", crd = unpack(crd, 0, "TOP"))
+    crd = unpack(crd, 0, "TOP")
+    print(crd)
+    return render_template("table.html", crd = crd)
 
 def unpack(crd, indent: int, prev_name:str):
     top_level_obj = crd_object([], prev_name)
