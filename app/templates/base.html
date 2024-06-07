@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>{{ title }}</title>
+    <title>Kubernates CRD Reader</title>
     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">-->
     <style>
       table { border-collapse: collapse; font-size: 30px;}
@@ -25,23 +25,47 @@
       th:nth-child(even),td:nth-child(even) {
         background-color: rgba(150, 212, 212, 0.4);
       }
+      input[type=button], input[type=submit], input[type=reset] {
+        background-color: rgb(123, 130, 146);
+        border: none;
+        color: white;
+        font-size: large;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 30px;
+      }
+      input[type=text] {
+        width: 60%;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('https://www.w3schools.com/css/searchicon.png');
+        background-position: 10px 10px; 
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+      }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>{{ title }}</h1>
-      <hr>
-      {% block content %}{% endblock %}
-    </div>
+
     {% block scripts %}{% endblock %}
+    <h1>Kubernates CRD Reader</h1>
     <div class="container">
       <form method="POST"
             action="{{ url_for('fetch_crd') }}">
-          <input type="text"
+          <input type="text" font-size=40px
                 name="URL"
                 placeholder="URL">
-          <button type="submit">submit</button>
+          <input type="submit"></input>
       </form>
+    </div>
+    <div class="container">
+      <hr>
+      {% block content %}{% endblock %}
     </div>
   </body>
 </html>

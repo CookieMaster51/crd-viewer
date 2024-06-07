@@ -2,52 +2,52 @@
 
 {% block content %}
 
-  <table id="data" class="table table-striped">
-    <thead>
+<table id="data" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+      <th>Info</th>
+    </tr>
+  </thead>
+</table>
+{% for element in crd %}
+<div class="{{ element.classes }}" id="{{ element.id }}" style="margin-left: {{ 20 * element.indent }}px;">
+  <table class="table table-striped">
+    <tbody>
       <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Info</th>
+        <td>{{ element.name }}</td>
+        <td>{{ element.description }}</td>
+        <td>{{ element.types }}</td>
+        <td>{{ element.info }}</td>
       </tr>
-    </thead>
+    </tbody>
   </table>
-  {% for element in crd %}
-    <div class = "{{ element.classes }}" id = "{{ element.id }}" style="margin-left: {{20 * element.indent}}px;">
-      <table class="table table-striped">
-        <tbody>
-            <tr>
-              <td>{{ element.name }}</td>
-              <td>{{ element.description }}</td>
-              <td>{{ element.types }}</td>
-              <td>{{ element.info }}</td>
-            </tr>
-        </tbody>
-      </table>
-    </div>
-  {% endfor %}
+</div>
+{% endfor %}
 
-  <script>
-    function appendHtml(id){
-        var displayDiv = document.getElementById(id);
-        var displayValue = (displayDiv.style.display === "") ? "none" : "";
-        this.innerHTML = (displayValue === "block") ? "Hide The Div" : "Show The Div";
-        displayDiv.style.display = displayValue;
+<script>
+  function appendHtml(id) {
+    var displayDiv = document.getElementById(id);
+    var displayValue = (displayDiv.style.display === "") ? "none" : "";
+    this.innerHTML = (displayValue === "block") ? "Hide The Div" : "Show The Div";
+    displayDiv.style.display = displayValue;
+  }
+  function hoverByClass(classname, colorover, colorout = "transparent") {
+    var elms = document.getElementsByClassName(classname);
+    for (var i = 0; i < elms.length; i++) {
+      elms[i].onmouseover = function () {
+        for (var k = 0; k < elms.length; k++) {
+          elms[k].style.backgroundColor = colorover;
+        }
+      };
+      elms[i].onmouseout = function () {
+        for (var k = 0; k < elms.length; k++) {
+          elms[k].style.backgroundColor = colorout;
+        }
+      };
     }
-    function hoverByClass(classname,colorover,colorout="transparent"){
-      var elms=document.getElementsByClassName(classname);
-      for(var i=0;i<elms.length;i++){
-        elms[i].onmouseover = function(){
-          for(var k=0;k<elms.length;k++){
-            elms[k].style.backgroundColor=colorover;
-          }
-        };
-        elms[i].onmouseout = function(){
-          for(var k=0;k<elms.length;k++){
-            elms[k].style.backgroundColor=colorout;
-          }
-        };
-      }
-    }
-  </script>
+  }
+</script>
 {% endblock %}
