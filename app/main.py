@@ -2,14 +2,21 @@ from classist import crd_object
 import requests
 import yaml
 import pprint
-from flask import Flask, render_template
+import requests
+import json
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 @app.route("/")
-def fetch_crd():
-    response = requests.get("https://raw.githubusercontent.com/prometheus-community/helm-charts/main/charts/kube-prometheus-stack/charts/crds/crds/crd-prometheusrules.yaml")
+def base():
+    return render_template("base.html")
 
+@app.route("/fetch-crd", methods=['POST'])
+def fetch_crd():
+    print("here")
+    url = request.form["URL"]
+    response = requests.get(url)
     crds = list(yaml.safe_load_all(response.text))
     crd = crds[0]
     # pprint.pp(crd)
@@ -68,7 +75,7 @@ def unpack(crd, indent, classes:list, current_set:list, top=False):
         
     return current_set
 
-app.run()
+app.run(debug=True)
 # def unpack(crd, indent: int, prev_name:str):
 #     top_level_obj = crd_object([], prev_name)
 #     if type(crd) == str:

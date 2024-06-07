@@ -34,5 +34,14 @@
       {% block content %}{% endblock %}
     </div>
     {% block scripts %}{% endblock %}
+    <div class="container">
+      <form method="POST"
+            action="{{ url_for('fetch_crd') }}">
+          <input type="text"
+                name="URL"
+                placeholder="URL">
+          <button type="submit">submit</button>
+      </form>
+    </div>
   </body>
 </html>
