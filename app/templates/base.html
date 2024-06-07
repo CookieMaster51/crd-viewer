@@ -2,7 +2,30 @@
 <html>
   <head>
     <title>{{ title }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">-->
+    <style>
+      table { border-collapse: collapse; font-size: 30px;}
+      tr { 
+        border-right: solid 1px rgb(123, 130, 146); 
+        border-left: solid 1px rgb(123, 130, 146);
+        width: 100px;
+        border-bottom: 1px solid rgb(123, 130, 146);
+      }
+      td {
+        border-right: solid 2px rgb(123, 130, 146); 
+        border-left: solid 2px rgb(123, 130, 146);
+        width: 400px;
+        border-bottom: 2px solid rgb(123, 130, 146);
+        border-top: 2px solid rgb(123, 130, 146);
+      }
+      tr:nth-child(even) {
+        background-color: rgba(150, 212, 212, 0.4);
+      }
+
+      th:nth-child(even),td:nth-child(even) {
+        background-color: rgba(150, 212, 212, 0.4);
+      }
+    </style>
   </head>
   <body>
     <div class="container">
